@@ -47,4 +47,5 @@ server3.o: server3.cpp
 23.) Press build then make and execute server3.cpp and then open robot.cpp and execute this too. Click on the Global view window and your robot should be running
 24.) To change the courses between core, completion, and challenge, open cofig.txt in the AVC_server folder and change ‘core.txt’ to any of these on line 1 then save this txt file
 “mazeFile,core.txt / “mazeFile,completion.txt / mazeFile,challenge.txt
+
 25.) Each time you want to run the robot from now on, begin from step 19
