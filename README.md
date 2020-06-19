@@ -17,9 +17,9 @@ Instructions for making the robot run on Windows:
 INCLUDE = -I C:\Users\HP\Documents\University\ENGR101\robot2\SFML\include<br/>
 LIBS = -L C:\Users\HP\Documents\University\ENGR101\robot2\SFML\lib<br/>
 robot.exe: robot.o<br/>
-         g++ $(LIBS) -o robot robot.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;g++ $(LIBS) -o robot robot.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network<br/>
 robot.o: robot.cpp<br/>
-         g++  -c $(INCLUDE) robot.cpp 
+&nbsp;&nbsp;&nbsp;&nbsp;g++  -c $(INCLUDE) robot.cpp 
 
 Where the file path on line 1 (INCLUDE) is the path to your SFML include file, and the path on line 2 is your SFML lib file. Change the address on your makefile to associate with the location you have chosen to put your files. Make sure you have a tab indent before both g++ and not spaces.
 
@@ -48,9 +48,9 @@ Where the file path on line 1 (INCLUDE) is the path to your SFML include file, a
 INCLUDE = -I C:\Users\HP\Documents\University\ENGR101\robot2\SFML\include<br/>
 LIBS = -L C:\Users\HP\Documents\University\ENGR101\robot2\SFML\lib<br/>
 robot.exe: robot.o<br/> 
-	g++ $(LIBS) -o robot robot.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;g++ $(LIBS) -o robot robot.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network<br/> 
 robot.o: robot.cpp<br/>
-	g++  -c $(INCLUDE) robot.cpp<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;g++  -c $(INCLUDE) robot.cpp<br/> 
   
 To:
 
