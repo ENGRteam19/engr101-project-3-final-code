@@ -1,0 +1,191 @@
+#include "robot.hpp"
+
+//array
+int image[100][150];
+
+//Classes
+//image processing class
+class ImageProcessing{
+	private:
+	int width, num;
+	public:
+	bool left = false;
+	bool straight = false;
+	bool right = false;
+	bool ifPath = false;
+	bool topLine = false;
+	bool bottomLine = false;
+	
+	int sum = 0;
+	int count = 0;
+	ImageProcessing(int color, int width);
+	void checkRows();
+	void checkColumns();
+	void ifSharpTurn(int sharpturn);
+};
+
+ImageProcessing::ImageProcessing(int color, int imageWidth){ //constructor
+	num = color; //integer corresponding to color searched for
+	width = imageWidth;
+}
+//checks if there is a pixel of the specified color on each row
+void ImageProcessing::checkRows(){ 
+	for(int i=0; i<width; i++) { // checks if the path continues straight ahead
+		if(image[0][i] == num){
+			straight = true;
+		}
+		if(image[cameraView.height/2][i] == num){ //finds total and number of pixels in the red line
+			sum = sum+i;
+			count++;
+			topLine = true; //checking for pixels only in bottom of cameraview
+		}
+		if(image[cameraView.height*9/10][i] == num) {
+			topLine = true; //checking for pixels only in bottom of cameraview
+		}
+		if(image[cameraView.height-1][i] == num){
+			bottomLine = true; //checking for pixels only in bottom of cameraview
+		}
+	}
+}
+// working check if path to the left or path to the right
+void ImageProcessing::checkColumns(){
+	for(int i=cameraView.height/3; i<cameraView.height; i++){
+		if (image[i][0] == num){
+			left = true;
+		}
+		if (image[i][width-1] == num){
+			right = true;
+		}
+	}
+}
+//changing options incase robot needs to do a sharp Uturn around an object
+void ImageProcessing::ifSharpTurn(int sharpturn){
+	count = 0;
+	right = false;
+	straight = false;
+	left = false;
+	if(sharpturn > 49) {
+		right = true;
+	}
+	else if(sharpturn < 43 && sharpturn >= 30){
+		left = true;
+	}
+	else if(sharpturn < 15) {
+		left = true;
+	}
+}
+
+//class for moving the robot
+class RobotMovement{
+	private:
+	double vBase = 15.0; //defining base speed
+    double vLeft, vRight;
+	double error, dv;
+    
+    public:
+    int correctPath, centre;
+    double direction;
+    void move();
+    void getDirection(ImageProcessing path);
+};
+// moving the robot
+void RobotMovement::move(){
+	error = centre - correctPath - direction; // calculating error
+	dv = 0.05*error;
+	
+	vLeft = vBase + dv; //adjusting moter speeds
+	vRight = vBase - dv;
+		
+	setMotors(vLeft,vRight); //setting moters
+		
+	std::cout<<" vLeft="<<vLeft<<"  vRight="<<vRight<<std::endl;
+}
+//code for turning the robot sharp directions and picking paths to take(rightmost first)
+void RobotMovement::getDirection(ImageProcessing path){		
+	if(path.right){
+		direction = -150;
+	}
+	else if(path.straight) {
+		direction = 0;
+	}
+	else if(path.left) {
+		direction = 150;
+	}
+	else{ direction = 0;}
+}
+
+int main(){
+	if (initClientRobot() !=0){
+		std::cout<<" Error initializing robot"<<std::endl;
+	}
+	
+    int sharpturn = 0; //number of consecutive loops to call the ifSharpturn method
+
+    while(1){
+		takePicture(); //take new cameraview image
+		SavePPMFile("i0.ppm",cameraView);
+		
+		//instantiate classes
+		ImageProcessing line = ImageProcessing(1, cameraView.width);
+		ImageProcessing maze = ImageProcessing(2, cameraView.width/2);
+		RobotMovement robot;
+		
+		//loop through cameraView image and save white pixels as 1 and red as 2 to array
+		for (int row = 0; row < cameraView.height; row++) {
+			for ( int column = 0; column < cameraView.width ; column++) {
+				if((int)(get_pixel(cameraView, row, column, 3)) > 250){
+					line.ifPath = true; //holding that array has white pixels
+					image[row][column] = 1;
+				}
+				else if((int)(get_pixel(cameraView, row, column, 0)) > 2*(get_pixel(cameraView, row, column, 1)) && (int)(get_pixel(cameraView, row, column, 0)) > 2*(int)(get_pixel(cameraView, row, column, 2))) {
+					maze.ifPath = true; //holding that array red pixels
+					image[row][column] = 2;
+				}
+				else {
+					image[row][column] = 0; //other colors stored as 0
+				}
+			}
+		}
+		
+		if(line.ifPath){	//if white pixels are detected
+			line.checkRows();
+			line.checkColumns();
+			
+			robot.correctPath = cameraView.width/2; //white line should be middle of cameraview
+			robot.centre = robot.correctPath;
+			if(line.count > 0) {
+				robot.centre = (int)(line.sum/line.count); //check where white line actually is if in middle of screen
+			}
+			robot.getDirection(line);
+		}
+		else if(maze.ifPath || sharpturn > 0){	//if red pixels are detected
+			maze.checkRows();
+			maze.checkColumns();
+			
+			//check to see if redline stops slowly goes away and robot needs to do a sharp u turn
+			if(!maze.topLine && maze.bottomLine && sharpturn == 0) {
+				sharpturn = 55;
+			}
+			if(sharpturn > 0){
+				maze.ifSharpTurn(sharpturn);	//conduct certain moves for a certain number of turns to manuver around object
+				sharpturn--;
+			}
+			
+			robot.correctPath = cameraView.width/5; //red line must be at left of screen
+			robot.centre = robot.correctPath;
+			if(maze.count > 0) {
+				robot.centre = (int)(maze.sum/maze.count);
+			}
+			robot.getDirection(maze);
+			
+		}
+		else if(!line.ifPath && !maze.ifPath) {
+			robot.correctPath = cameraView.width/2;
+			robot.direction = -15/0.05; //if nothing detected turn sharply
+		}
+		
+		robot.move(); //move the robot
+
+		usleep(10000); //pause
+	} //while
+} // main
