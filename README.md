@@ -57,9 +57,9 @@ To:
 INCLUDE = -I C:\Users\HP\Documents\University\ENGR101\robot2\SFML\include<br/>
 LIBS = -L C:\Users\HP\Documents\University\ENGR101\robot2\SFML\lib<br/>
 robot.exe: robot.o<br/> 
-	g++ $(LIBS) -o server3 server3.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;g++ $(LIBS) -o server3 server3.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network<br/> 
 server3.o: server3.cpp<br/>
-	g++  -c $(INCLUDE) server3.cpp<br/> 
+&nbsp;&nbsp;&nbsp;&nbsp;g++  -c $(INCLUDE) server3.cpp<br/> 
 	
 19.) Delete server3.o and server3.exe in the AVC_server folder
 
