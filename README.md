@@ -75,7 +75,9 @@ server3.o: server3.cpp
 25.) Each time you want to run the robot from now on, begin from step 19
 
 Instructions for MinGW compiler:
+
 1.) Download MinGW for windows through: https://sourceforge.net/projects/mingw-w64/files/mingw-w64/
+
 2.) Download and run file https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/mingw-w64-install.exe
 (It should start installing automatically after you've clicked the link)
 
@@ -97,3 +99,22 @@ Click on this folder until you find one called “bin” and find c++.exe
 
 10.) Close the dialog box by pressing OK and restart your computer
 
+Instructions for using Geany:
+
+https://osdn.net/projects/mingw/releases/
+
+1.) Install the Mingw software associated with your pc (mingw-get-setup.exe)
+
+2.) Click next on the install page and agree to the license agreement
+
+3.) Close the current version
+
+4.) Reopen and choose the components that you need and run the compiler to check if it is working properly. Otherwise you are able to run the installer again to add more components.
+
+5.) Use the default destination folder (C:\MinGW).
+
+https://www.geany.org/download/releases/
+
+6.) Download Geany for your operating system with the above link. (Windows/Linux/Mac)
+
+7.) Restart computer before using.
