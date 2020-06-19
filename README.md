@@ -75,9 +75,9 @@ server3.o: server3.cpp
 “mazeFile,core.txt / “mazeFile,completion.txt / mazeFile,challenge.txt
 
 25.) Each time you want to run the robot from now on, begin from step 19
-
-
-
+.
+.
+.
 Instructions for MinGW compiler:
 
 1.) Download MinGW for windows through: https://sourceforge.net/projects/mingw-w64/files/mingw-w64/
@@ -102,9 +102,9 @@ Click on this folder until you find one called “bin” and find c++.exe
 9.) Double check that folder name is pasted into this line!
 
 10.) Close the dialog box by pressing OK and restart your computer
-
-
-
+.
+.
+.
 Instructions for using Geany:
 
 https://osdn.net/projects/mingw/releases/
