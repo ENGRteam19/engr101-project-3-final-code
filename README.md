@@ -43,8 +43,11 @@ server3.o: server3.cpp
 19.) Delete server3.o and server3.exe in the AVC_server folder
 20.) Open server3.cpp and press ‘make all’ like before
 21.) This should compile successfully
+
 22.) To run the actual robot, I suggest you close all geany files and open server3.cpp again and the robot.cpp in a new instance of geany
+
 23.) Press build then make and execute server3.cpp and then open robot.cpp and execute this too. Click on the Global view window and your robot should be running
+
 24.) To change the courses between core, completion, and challenge, open cofig.txt in the AVC_server folder and change ‘core.txt’ to any of these on line 1 then save this txt file
 “mazeFile,core.txt / “mazeFile,completion.txt / mazeFile,challenge.txt
 
