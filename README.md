@@ -73,3 +73,27 @@ server3.o: server3.cpp
 “mazeFile,core.txt / “mazeFile,completion.txt / mazeFile,challenge.txt
 
 25.) Each time you want to run the robot from now on, begin from step 19
+
+Instructions for MinGW compiler:
+1.) Download MinGW for windows through: https://sourceforge.net/projects/mingw-w64/files/mingw-w64/
+2.) Download and run file https://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win32/Personal%20Builds/mingw-builds/installer/mingw-w64-install.exe
+(It should start installing automatically after you've clicked the link)
+
+3.) If you need Administrator rights to do it, right-click file and click "Run as Administrator" from drop down menu
+This should install MinGW
+
+4.) Search for it through checking folders like C:\\MinGW or C:\\Users\YourUserName\MinGW or C:\\Program Files\MinGW etc
+Click on this folder until you find one called “bin” and find c++.exe
+
+5.) Copy the path by right-clicking the path bar of File Explorer and select Copy as text from pop-down menu
+
+6.) Now open your computer Settings and search environment
+
+7.) Click Set environmental variables from the menu and dialog box should appear
+
+8.) Click PATH, Edit, then New. Go to the next empty line and paste the path you previously copied (ctrl-v)
+
+9.) Double check that folder name is pasted into this line!
+
+10.) Close the dialog box by pressing OK and restart your computer
+
