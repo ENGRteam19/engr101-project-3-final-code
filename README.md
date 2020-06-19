@@ -1,3 +1,5 @@
+Instructions for making the robot run on Windows:
+
 1.) Download and install the MinGW compiler (instructions below) and MinGW SFML for windows https://www.sfml-dev.org/download/sfml/2.5.1/
 
 2.) Unzip the SFML file into a new folder
