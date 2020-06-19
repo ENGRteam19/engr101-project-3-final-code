@@ -45,21 +45,21 @@ Where the file path on line 1 (INCLUDE) is the path to your SFML include file, a
 
 18.) Replace all ‘robot’ with ‘server3’ like below
 
-INCLUDE = -I C:\Users\HP\Documents\University\ENGR101\robot2\SFML\include
-LIBS = -L C:\Users\HP\Documents\University\ENGR101\robot2\SFML\lib
-robot.exe: robot.o 
-	g++ $(LIBS) -o robot robot.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network 
-robot.o: robot.cpp
-	g++  -c $(INCLUDE) robot.cpp 
+INCLUDE = -I C:\Users\HP\Documents\University\ENGR101\robot2\SFML\include<br/>
+LIBS = -L C:\Users\HP\Documents\University\ENGR101\robot2\SFML\lib<br/>
+robot.exe: robot.o<br/> 
+	g++ $(LIBS) -o robot robot.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network<br/> 
+robot.o: robot.cpp<br/>
+	g++  -c $(INCLUDE) robot.cpp<br/> 
   
 To:
 
-INCLUDE = -I C:\Users\HP\Documents\University\ENGR101\robot2\SFML\include
-LIBS = -L C:\Users\HP\Documents\University\ENGR101\robot2\SFML\lib
-robot.exe: robot.o 
-	g++ $(LIBS) -o server3 server3.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network 
-server3.o: server3.cpp
-	g++  -c $(INCLUDE) server3.cpp 
+INCLUDE = -I C:\Users\HP\Documents\University\ENGR101\robot2\SFML\include<br/>
+LIBS = -L C:\Users\HP\Documents\University\ENGR101\robot2\SFML\lib<br/>
+robot.exe: robot.o<br/> 
+	g++ $(LIBS) -o server3 server3.o -lsfml-window  -lsfml-graphics -lsfml-system -lsfml-network<br/> 
+server3.o: server3.cpp<br/>
+	g++  -c $(INCLUDE) server3.cpp<br/> 
 	
 19.) Delete server3.o and server3.exe in the AVC_server folder
 
